@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class MainActivity3 extends AppCompatActivity {
     ListView news_list;
-    ArrayList<String> the_list;
+    ArrayList<String> temp=new ArrayList<String>();;
     ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,6 @@ public class MainActivity3 extends AppCompatActivity {
         String username=i.getStringExtra("username");
 
         news_list= findViewById(R.id.news_list);
-        the_list= new ArrayList<String>();
 
         try{
 
@@ -40,7 +39,7 @@ public class MainActivity3 extends AppCompatActivity {
         c.moveToFirst();
             while(c!= null){
                 String titlee = c.getString(title_count) + " ";
-                the_list.add(titlee);
+                temp.add(titlee);
                 c.moveToNext();
             }
 
@@ -48,16 +47,16 @@ public class MainActivity3 extends AppCompatActivity {
         e.printStackTrace();
     }
 
-    adapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
+    adapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, temp);
         news_list.setAdapter(adapter);
         news_list.setOnItemClickListener((adapterView, view, i1, l) -> {
            Intent intent= new Intent(getApplicationContext(),MainActivity4.class);
-            intent.putExtra("title",the_list.get(i1));
+            intent.putExtra("title",temp.get(i1));
             startActivity(intent);
        });
 }
 
-    public void addNews(View v){
+    public void add_news(View v){
         Intent intent= new Intent(getApplicationContext(),MainActivity5.class);
        startActivity(intent);
     }
